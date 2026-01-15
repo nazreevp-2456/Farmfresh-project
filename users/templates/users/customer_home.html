@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Home | FarmFresh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body style="background:#fffdf5;">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+        <span class="navbar-brand">🥬 FarmFresh Marketplace</span>
+
+        <!-- Right-side buttons -->
+        <div class="d-flex align-items-center ms-auto">
+
+            <!-- 🔔 Notification Bell -->
+            <div class="position-relative me-3">
+                <i class="bi bi-bell text-white" style="font-size:1.5rem;"></i>
+                {% if notifications_count > 0 %}
+                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
+                        {{ notifications_count }}
+                    </span>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'my_orders' %}" class="btn btn-light btn-sm me-2">My Orders</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h4>Welcome, {{ request.user.username }} 🧑‍💼</h4>
+    <p class="text-muted">
+        Buy fresh organic fruits & vegetables directly from farmers
+    </p>
+
+    <div class="row mt-4">
+        <!-- Browse Products Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>Browse Products</h5>
+                    <p>View available farm produce</p>
+                    <a href="{% url 'browse_products' %}" class="btn btn-success">View Products</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Orders Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>My Orders</h5>
+                    <p>Track your purchases</p>
+                    <a href="{% url 'my_orders' %}" class="btn btn-success">My Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5>Profile</h5>
+                    <p>Manage your account</p>
+                    <a href="#" class="btn btn-success btn-sm">My Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

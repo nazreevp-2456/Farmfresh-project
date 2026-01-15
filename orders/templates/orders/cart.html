@@ -1,0 +1,67 @@
+{% load cart_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h2>🛒 My Cart</h2>
+
+{% if items %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>₹{{ item.product.price }}</td>
+
+            <td>
+                <form method="POST" action="{% url 'update_cart' item.id %}">
+                    {% csrf_token %}
+                    <input type="number" name="quantity"
+                           value="{{ item.quantity }}"
+                           min="1" class="form-control"
+                           style="width:80px; display:inline;">
+            </td>
+
+            <td>₹{{ item.product.price|floatformat:2|add:"0"|floatformat:2 }}</td>
+
+            <td>
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        Update
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Total: ₹{{ total }}</h4>
+
+<a href="{% url 'checkout' %}" class="btn btn-success">
+    Checkout
+</a>
+
+{% else %}
+<p>Your cart is empty</p>
+{% endif %}
+
+<div class="text-center mb-3">
+    <a href="{% url 'home' %}" class="text-success fw-semibold">
+        ← Back to Home
+    </a>
+
+</body>
+</html>

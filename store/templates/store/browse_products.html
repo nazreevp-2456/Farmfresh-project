@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browse Products | FarmFresh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background:#f8fff8;">
+<div class="container mt-4">
+
+    <h3 class="mb-3">Available Organic Products 🌿</h3>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top"
+                     style="height:200px; object-fit:cover;">
+                {% else %}
+                <div class="text-center p-5 bg-light">
+                    No Image
+                </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+
+                    <p class="card-text">
+                        {{ product.description|truncatewords:15 }}
+                    </p>
+
+                    <p>
+                        <strong>₹ {{ product.price }}</strong>
+                    </p>
+
+                    <small class="text-muted d-block mb-2">
+                        Farmer: {{ product.farmer.username }}
+                    </small>
+
+                    {% if product.stock > 0 %}
+                        <span class="badge bg-success mb-2">
+                            In Stock ({{ product.stock }})
+                        </span>
+
+                        <a href="{% url 'add_to_cart' product.id %}"
+                           class="btn btn-success btn-sm w-100 mt-2">
+                            Add to Cart
+                        </a>
+                    {% else %}
+                        <span class="badge bg-danger">
+                            Out of Stock
+                        </span>
+
+                        <button class="btn btn-secondary btn-sm w-100 mt-2" disabled>
+                            Not Available
+                        </button>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <p>No products available.</p>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'home' %}" class="btn btn-secondary mt-3">
+        Back
+    </a>
+
+</div>
+</body>
+</html>

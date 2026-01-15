@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product | FarmFresh</title>
+
+    <style>
+        body {
+            background-color: #f3fff1;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .form-container {
+            width: 460px;
+            margin: 80px auto;
+            background: #ffffff;
+            padding: 35px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .form-title span {
+            color: #1b8f3c;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 9px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #198754;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background: #157347;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-container">
+    <div class="form-title">
+        <span>＋</span> Add Product
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Product Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            {{ form.category }}
+        </div>
+
+        <div class="form-group">
+            <label>Price (₹)</label>
+            {{ form.price }}
+        </div>
+
+        <div class="form-group">
+            <label>Available Quantity</label>
+            {{ form.stock }}
+        </div>
+
+        <div class="form-group">
+            <label>Product Image</label>
+            {{ form.image }}
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            {{ form.description }}
+        </div>
+
+        <button type="submit" class="btn-submit">
+            Add Product
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
